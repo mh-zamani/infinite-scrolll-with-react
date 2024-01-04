@@ -1,5 +1,25 @@
+import {useEffect , useState } from "react";
 import pizza from "./assets/pizza.jpg";
+import Comment from "./component/comment";
 function App() {
+  const [comments , setComments] = useState([]);
+  const [loading , setLoading] = useState(false);
+
+  const fetchData = async () =>{
+    setLoading(true);
+    const respone = await fetch(
+      "https://react-mini-projects-api.classbon.com/Comments/1"
+      );
+    const data = await respone.json();
+
+    setComments(data);
+    setLoading(false);
+  };
+
+  useEffect( () =>{
+    fetchData();
+  }, [] );
+
   return (
     <div className="container pt-5">
       <div className="row">
@@ -64,7 +84,16 @@ function App() {
       </div>
       <hr />
       <div className="row">
-        <div className="col-12">
+        <div className="col-12 pt-5">
+          {
+            loading ? (
+              <div className="d-flex justify-content-center">
+                <div className="spinner-border"></div>
+              </div>
+            ) : (
+              comments.map(comment => <Comment key={comment.id} {...comment}/>)
+            )
+          }
         </div>
       </div>
     </div>
