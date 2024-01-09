@@ -4,6 +4,10 @@ const Comment = ({name , imageUrl , description , date}) =>{
             <img className="rounded-circle"  width="50" src={imageUrl} alt="user"  />
             <div className="pe-3">
                 <h6 className="mb-0">{name}</h6>
+                <p className="mb-1">{description}</p>
+                <span className="fs-sm text-muted">
+                    {date}
+                </span>
             </div>
         </div>
     )
