@@ -13,7 +13,8 @@ function App() {
       `https://react-mini-projects-api.classbon.com/Comments/${page}`
       );
     const data = await respone.json();
-
+    data.length === 0 ? setLastElement(null)
+    :
     setComments((oldData) => [...oldData , ...data]);
     setLoading(false);
   };
